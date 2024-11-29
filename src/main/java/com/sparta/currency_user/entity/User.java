@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "users")
+@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
 
@@ -20,8 +20,8 @@ public class User extends BaseEntity {
     private String name;
     private String email;
 
-    @OneToMany( mappedBy = "user_id", cascade = CascadeType.REMOVE )
-    private List<RequestExchange> requestExchangeList = new ArrayList<>();
+    @OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
+    private List<Exchange> exchangetList = new ArrayList<>();
 
     public User(String name, String email) {
         this.name = name;

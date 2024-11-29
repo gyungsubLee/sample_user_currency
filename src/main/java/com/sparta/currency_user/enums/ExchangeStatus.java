@@ -1,6 +1,6 @@
 package com.sparta.currency_user.enums;
 
 
-public enum RequestExchangeStatus {
+public enum ExchangeStatus {
     NORMAL, CANCEL
 }

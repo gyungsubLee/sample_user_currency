@@ -1,6 +1,6 @@
 package com.sparta.currency_user.entity;
 
-import com.sparta.currency_user.enums.RequestExchangeStatus;
+import com.sparta.currency_user.enums.ExchangeStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "request_exchange")
-public class RequestExchange extends BaseEntity {
+@Table(name = "exchange")
+public class Exchange extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class RequestExchange extends BaseEntity {
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name =  "user_id")
-    private User user_id;
+    private User user;
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "currency_id" )

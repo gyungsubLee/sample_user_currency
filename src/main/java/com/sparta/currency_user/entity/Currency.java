@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table( name = "currency" )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Currency extends BaseEntity {
 
@@ -23,8 +22,8 @@ public class Currency extends BaseEntity {
     private BigDecimal exchangeRate;
     private String symbol;
 
-    @OneToMany(mappedBy = "to_currency_id")
-    private List<Currency> currencyList = new ArrayList<>();
+    @OneToMany(mappedBy = "currency")
+    private List<Exchange> exchangeList = new ArrayList<>();
 
     public Currency(String currencyName, BigDecimal exchangeRate, String symbol) {
         this.currencyName = currencyName;
