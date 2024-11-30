@@ -66,5 +66,9 @@ public class Exchange extends BaseEntity {
         return exchange;
     }
 
+    //
+    public void updateStatus(ExchangeStatus exchangeStatus) {
+        this.status = exchangeStatus;
+    }
 }
 

@@ -10,6 +10,7 @@ import com.sparta.currency_user.enums.ExchangeStatus;
 import com.sparta.currency_user.repository.CurrencyRepository;
 import com.sparta.currency_user.repository.ExchangeRepository;
 import com.sparta.currency_user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -60,5 +61,12 @@ public class ExchangeService {
 
     public List<ResponseExchangeDto> findAllExchangesByUser(Long userId) {
         return exchangeRepository.findAllByUserId(userId).stream().map(ResponseExchangeDto::toDtto).toList();
+    }
+
+    @Transactional
+    public void updateExchangeStatus(Long id) {
+        Exchange findExchange = exchangeRepository.findByIdOrElseThrow(id);
+
+        findExchange.updateStatus(ExchangeStatus.CANCEL);
     }
 }

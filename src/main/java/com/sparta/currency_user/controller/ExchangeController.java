@@ -41,4 +41,12 @@ public class ExchangeController {
                 exchangeService.findAllExchangesByUser(userId)
         );
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> updateExchangeStatus(@PathVariable Long id){
+        exchangeService.updateExchangeStatus(id);
+        return ResponseEntity.ok().body("환전 요청이 취소 되었숩니다.");
+    }
+
+
 }
