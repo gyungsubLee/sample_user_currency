@@ -1,5 +1,7 @@
 package com.sparta.currency_user.dto.Exchange;
 
+import com.sparta.currency_user.dto.currency.CurrencyResponseDto;
+import com.sparta.currency_user.entity.Currency;
 import com.sparta.currency_user.entity.Exchange;
 import com.sparta.currency_user.enums.ExchangeStatus;
 import lombok.Getter;
@@ -23,5 +25,9 @@ public class ResponseExchangeDto {
         this.amountInKR = exchange.getAmountInKrw();
         this.amountAfterExchange = exchange.getAmountInExchange();
         this.status = exchange.getStatus();
+    }
+
+    public static ResponseExchangeDto toDtto(Exchange exchange){
+        return new ResponseExchangeDto(exchange);
     }
 }

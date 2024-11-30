@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("exchanges")
+@RequestMapping("/exchanges")
 @RequiredArgsConstructor
 public class ExchangeController {
 
@@ -32,6 +34,11 @@ public class ExchangeController {
         );
     }
 
-
-
+    // TODO: 세션 인증/인가로 변경 시 URI 수정 필요
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<List<ResponseExchangeDto>> findAllExchangesByUser(@PathVariable Long userId){
+        return ResponseEntity.ok().body(
+                exchangeService.findAllExchangesByUser(userId)
+        );
+    }
 }
