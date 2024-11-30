@@ -8,7 +8,7 @@
 
 ### ERD
 
-![](./img/erd2.png)
+![](./img/ERD.png)
 
 
 <br/>
