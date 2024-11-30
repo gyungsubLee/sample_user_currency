@@ -7,6 +7,7 @@ import com.sparta.currency_user.entity.Exchange;
 import com.sparta.currency_user.service.ExchangeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class ExchangeController {
             ) {
 
         // TODO: 세션 인증 인가 과정을 위해 유저 id를 getter로 넘겨줌
-        return ResponseEntity.ok().body(
+        return ResponseEntity.status(HttpStatus.CREATED).body(
                 exchangeService.save(
                         currencyId,
                         requestExchangeDto.getUserId(),
