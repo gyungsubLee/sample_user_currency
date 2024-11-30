@@ -5,6 +5,7 @@ import com.sparta.currency_user.dto.Exchange.RequestExchangeDto;
 import com.sparta.currency_user.dto.Exchange.ResponseExchangeDto;
 import com.sparta.currency_user.entity.Exchange;
 import com.sparta.currency_user.service.ExchangeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ExchangeController {
     @PostMapping("/currencies/{currencyId}")
     public ResponseEntity<ResponseExchangeDto> save(
             @PathVariable Long currencyId,
-            @RequestBody RequestExchangeDto requestExchangeDto
+            @Valid  @RequestBody RequestExchangeDto requestExchangeDto
             ) {
 
         // TODO: 세션 인증 인가 과정을 위해 유저 id를 getter로 넘겨줌
@@ -47,6 +48,4 @@ public class ExchangeController {
         exchangeService.updateExchangeStatus(id);
         return ResponseEntity.ok().body("환전 요청이 취소 되었숩니다.");
     }
-
-
 }
