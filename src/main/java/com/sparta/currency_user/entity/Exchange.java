@@ -28,6 +28,8 @@ public class Exchange extends BaseEntity {
 
     private BigDecimal amountInKrw;
     private BigDecimal amountInExchange;
+
+    @Enumerated(value = EnumType.STRING)
     private ExchangeStatus status;
 
 
