@@ -20,13 +20,18 @@ public class Exchange extends BaseEntity {
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name =  "user_id")
+    @Column(nullable = false)
     private User user;
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "currency_id" )
+    @Column(nullable = false)
     private Currency currency;
 
+    @Column(nullable = false)
     private BigDecimal amountInKrw;
+
+    @Column(nullable = false)
     private BigDecimal amountInExchange;
 
     @Enumerated(value = EnumType.STRING)

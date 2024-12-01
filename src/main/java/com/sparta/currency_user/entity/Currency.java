@@ -18,8 +18,13 @@ public class Currency extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String currencyName;
+
+    @Column(nullable = false)
     private BigDecimal exchangeRate;
+
+    @Column(nullable = false, unique = true)
     private String symbol;
 
     @OneToMany(mappedBy = "currency")
