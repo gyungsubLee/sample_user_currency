@@ -19,13 +19,11 @@ public class Exchange extends BaseEntity {
     private Long id;
 
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinColumn( name =  "user_id")
-    @Column(nullable = false)
+    @JoinColumn( name =  "user_id", nullable = false)
     private User user;
 
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinColumn( name = "currency_id" )
-    @Column(nullable = false)
+    @JoinColumn( name = "currency_id", nullable = false)
     private Currency currency;
 
     @Column(nullable = false)
