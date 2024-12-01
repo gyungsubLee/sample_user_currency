@@ -19,13 +19,14 @@ public class User extends BaseEntity {
     private Long id;
     private String name;
     private String email;
+    private String password;
 
     @OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
     private List<Exchange> exchangetList = new ArrayList<>();
 
-    public User(String name, String email) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
+        this.password = password;
     }
-
 }
