@@ -32,13 +32,9 @@ public class ExchangeService {
 
     public ResponseExchangeDto save(Long currencyId, Long userId, BigDecimal amountInKrw) {
 
-        Currency findCurrency = currencyRepository.findById(currencyId).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당하는 통화 정보를 찾을 수 없습니다.");
-        });
+        Currency findCurrency = currencyRepository.findByIdOrElseThrow(currencyId);
 
-        User findUser = userRepository.findById(userId).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당하는 통화 정보를 찾을 수 없습니다.");
-        });
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         // 환율
         BigDecimal exchangeRate = findCurrency.getExchangeRate();
@@ -60,7 +56,7 @@ public class ExchangeService {
     }
 
     public List<ResponseExchangeDto> findAllExchangesByUser(Long userId) {
-        return exchangeRepository.findAllByUserId(userId).stream().map(ResponseExchangeDto::toDtto).toList();
+        return exchangeRepository.findAllByUserId(userId).stream().map(ResponseExchangeDto::toDto).toList();
     }
 
     @Transactional

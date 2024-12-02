@@ -23,7 +23,7 @@ public class CurrencyService {
     }
 
     public Currency findCurrencyById(Long id) {
-        return currencyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "통화를 찾을 수 없습니다."));
+        return currencyRepository.findByIdOrElseThrow(id);
     }
 
     public List<CurrencyResponseDto> findAll() {

@@ -22,18 +22,13 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."));
+        return userRepository.findByIdOrElseThrow(id);
     }
 
     public List<UserResponseDto> findAll() {
         return userRepository.findAll().stream().map(UserResponseDto::toDto).toList();
     }
 
-    @Transactional
-    public UserResponseDto save(UserRequestDto userRequestDto) {
-        User savedUser = userRepository.save(userRequestDto.toEntity());
-        return new UserResponseDto(savedUser);
-    }
 
     @Transactional
     public void deleteUserById(Long id) {
