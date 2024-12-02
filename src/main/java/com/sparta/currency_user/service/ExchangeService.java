@@ -2,7 +2,6 @@ package com.sparta.currency_user.service;
 
 
 import com.sparta.currency_user.dto.Exchange.ResponseExchangeDto;
-import com.sparta.currency_user.dto.currency.CurrencyResponseDto;
 import com.sparta.currency_user.entity.Currency;
 import com.sparta.currency_user.entity.Exchange;
 import com.sparta.currency_user.entity.User;
@@ -10,12 +9,10 @@ import com.sparta.currency_user.enums.ExchangeStatus;
 import com.sparta.currency_user.repository.CurrencyRepository;
 import com.sparta.currency_user.repository.ExchangeRepository;
 import com.sparta.currency_user.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -30,22 +27,21 @@ public class ExchangeService {
     private final CurrencyRepository currencyRepository;
     private final ExchangeRepository exchangeRepository;
 
-    public ResponseExchangeDto save(Long currencyId, Long userId, BigDecimal amountInKrw) {
+    @Transactional
+    public ResponseExchangeDto save( Long userId,Long currencyId, BigDecimal amountInKrw) {
+
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         Currency findCurrency = currencyRepository.findByIdOrElseThrow(currencyId);
 
-        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         // 환율
         BigDecimal exchangeRate = findCurrency.getExchangeRate();
         log.info("환율 {}", exchangeRate);
 
-        // 환전
-        BigDecimal amountInExchange = amountInKrw.divide(exchangeRate,  2, RoundingMode.HALF_UP);
-        log.info("환전 금액 {}", amountInExchange);
 
-        // 생성메서드를 사용한 엔티티 생성
-        Exchange exchange = Exchange.createExchange(findUser, findCurrency, amountInKrw, amountInExchange, ExchangeStatus.NORMAL);
+        // 환전 - 엔티티 생성자 내부에서 처리
+        Exchange exchange = new Exchange(findUser, findCurrency, amountInKrw, exchangeRate, ExchangeStatus.NORMAL);
 
         Exchange saveExchange = exchangeRepository.save(exchange);
 
@@ -55,6 +51,7 @@ public class ExchangeService {
         return new ResponseExchangeDto(saveExchange);
     }
 
+    @Transactional(readOnly = true)
     public List<ResponseExchangeDto> findAllExchangesByUser(Long userId) {
         return exchangeRepository.findAllByUserId(userId).stream().map(ResponseExchangeDto::toDto).toList();
     }
