@@ -27,7 +27,7 @@ public class ResponseExchangeDto {
         this.status = exchange.getStatus();
     }
 
-    public static ResponseExchangeDto toDtto(Exchange exchange){
+    public static ResponseExchangeDto toDto(Exchange exchange){
         return new ResponseExchangeDto(exchange);
     }
 }
