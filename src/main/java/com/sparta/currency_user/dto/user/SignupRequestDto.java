@@ -19,6 +19,7 @@ public class SignupRequestDto {
     )
     private String email;
 
-    // TODO: 비밀번호 패턴 정의 전
+    // TODO: 비밀번호 패턴 정의 전 1
+    @NotBlank(message = "비밀번호를 입력해 주세요")
     private String password;
 }

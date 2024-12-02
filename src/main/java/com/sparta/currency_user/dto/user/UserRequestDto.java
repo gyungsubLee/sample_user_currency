@@ -19,10 +19,10 @@ public class UserRequestDto {
     )
     private String email;
 
-    public User toEntity() {
-        return new User(
-                this.name,
-                this.email
-        );
-    }
+//    public User toEntity() {
+//        return new User(
+//                this.name,
+//                this.email
+//        );
+//    }
 }

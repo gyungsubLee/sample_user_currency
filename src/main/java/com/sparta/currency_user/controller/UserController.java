@@ -27,10 +27,10 @@ public class UserController {
         return ResponseEntity.ok().body(userService.findById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
-        return ResponseEntity.ok().body(userService.save(userRequestDto));
-    }
+//    @PostMapping
+//    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
+//        return ResponseEntity.ok().body(userService.save(userRequestDto));
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
