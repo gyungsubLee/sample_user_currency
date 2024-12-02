@@ -20,17 +20,16 @@ public class ExchangeController {
 
     private final ExchangeService exchangeService;
 
-    @PostMapping("/currencies/{currencyId}")
+    @PostMapping
     public ResponseEntity<ResponseExchangeDto> save(
-            @PathVariable Long currencyId,
             @Valid  @RequestBody RequestExchangeDto requestExchangeDto
             ) {
 
         // TODO: 세션 인증 인가 과정을 위해 유저 id를 getter로 넘겨줌
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 exchangeService.save(
-                        currencyId,
                         requestExchangeDto.getUserId(),
+                        requestExchangeDto.getCurrencyId(),
                         requestExchangeDto.getAmountInKrw()
                 )
         );
